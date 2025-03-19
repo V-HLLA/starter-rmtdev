@@ -9,16 +9,16 @@ This is a fork of the original **React + TypeScript + Vite** template. I’m usi
 
 ## How to Run  
 1. Clone the repository:  
-   ```sh
+```sh
    git clone https://github.com/yourusername/repo-name.git
    cd repo-name
-   
+```
 2. Install dependencies:
-   ```sh
+```sh
 npm install
 ```
 3. Start the development server:
-   ```sh
+```sh
  npm run dev
 ```
 
