@@ -3,7 +3,7 @@
 This is a fork of the original **React + TypeScript + Vite** template. I’m using this repository to follow along with a Next.js/React course, making incremental commits for each lesson.  
 
 ## Learning Goals  
-- Implement concepts from each lesson with separate commits (e.g., "Lesson 118: Components Overview").  
+- Implement concepts from each lesson with separate commits.  
 - Gain hands-on experience with React, TypeScript, and Vite in a structured way.  
 - Experiment with ESLint configurations and best practices for production-ready applications.  
 
