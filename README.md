@@ -1,23 +1,29 @@
-# React + TypeScript + Vite Fork  
+# React + TypeScript + Vite Fork
 
-This is a fork of the original **React + TypeScript + Vite** template. I’m using this repository to follow along with a Next.js/React course, making incremental commits for each lesson.  
+This is a fork of the original **React + TypeScript + Vite** template. I’m using this repository to follow along with a Next.js/React course, making incremental commits for each lesson.
 
-## Learning Goals  
-- Implement concepts from each lesson with separate commits.  
-- Gain hands-on experience with React, TypeScript, and Vite in a structured way.  
-- Experiment with ESLint configurations and best practices for production-ready applications.  
+## Learning Goals
 
-## How to Run  
-1. Clone the repository:  
+- Implement concepts from each lesson with separate commits.
+- Gain hands-on experience with React, TypeScript, and Vite in a structured way.
+- Experiment with ESLint configurations and best practices for production-ready applications.
+
+## How to Run
+
+1. Clone the repository:
+
 ```sh
-   git clone https://github.com/yourusername/repo-name.git
-   cd repo-name
+   git clone https://github.com/V-HLLA/starter-rmtdev.git
 ```
+
 2. Install dependencies:
+
 ```sh
 npm install
 ```
+
 3. Start the development server:
+
 ```sh
  npm run dev
 ```
