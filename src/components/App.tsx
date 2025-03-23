@@ -12,7 +12,7 @@ import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
-import { useJobsItems } from "../libs/hooks";
+import { useJobsItems } from "../lib/hooks";
 
 function App() {
   const [searchText, setSearchText] = useState("");

@@ -1,4 +1,11 @@
-export default function SearchForm({ searchText, setSearchText }) {
+type TSearchFormProps = {
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+};
+export default function SearchForm({
+  searchText,
+  setSearchText,
+}: TSearchFormProps) {
   return (
     <form
       onSubmit={(e) => {

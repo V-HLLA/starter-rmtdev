@@ -1,4 +1,4 @@
-import { TJobItem } from "../libs/types";
+import { TJobItem } from "../lib/types";
 import BookmarkIcon from "./BookmarkIcon";
 
 type TJobListItemProps = {
@@ -8,7 +8,7 @@ type TJobListItemProps = {
 export default function JobListItem({ jobItem }: TJobListItemProps) {
   return (
     <li className="job-item">
-      <a className="job-item__link">
+      <a className="job-item__link" href={`#${jobItem.id}`}>
         <div className="job-item__badge">{jobItem.badgeLetters}</div>
 
         <div className="job-item__middle">
