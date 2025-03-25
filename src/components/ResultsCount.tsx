@@ -8,6 +8,9 @@ export default function ResultsCount({
   displayedCount,
 }: TresultsCount) {
   return (
-    <p className="count">{`${displayedCount} out of ${resultsCount} total results`}</p>
+    <p className="count">
+      <span className="u-bold">{displayedCount}</span> out of{" "}
+      <span className="u-bold">{resultsCount}</span> total results
+    </p>
   );
 }

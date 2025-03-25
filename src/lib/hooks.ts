@@ -69,3 +69,16 @@ export function useJobsItems(searchText: string) {
     displayedCount,
   };
 }
+
+export function useDebounce<T>(value: T, delay = 500): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const debounceID = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(debounceID);
+  }, [value, delay]);
+  return debouncedValue;
+}
