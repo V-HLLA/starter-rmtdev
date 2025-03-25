@@ -23,19 +23,22 @@ export function useActiveJobID(activeID: number | null) {
   const [activeJobItem, setActiveJobItem] = useState<TJobItemExpanded | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!activeID) return;
 
+    setIsLoading(true);
     const fetchData = async () => {
       const response = await fetch(`${BASE_API_URL}/${activeID}`);
       const data = await response.json();
+      setIsLoading(false);
       setActiveJobItem(data.jobItem);
     };
     fetchData();
   }, [activeID]);
 
-  return activeJobItem;
+  return { activeJobItem, isLoading };
 }
 
 export function useJobsItems(searchText: string) {
@@ -43,6 +46,8 @@ export function useJobsItems(searchText: string) {
   const [isLoading, setIsLoading] = useState(false);
 
   const jobItemsSliced = jobItems.slice(0, 7);
+  const displayedCount = jobItems.slice(0, 7).length;
+  const resultsCount = jobItems.length;
 
   useEffect(() => {
     if (!searchText) return;
@@ -60,5 +65,7 @@ export function useJobsItems(searchText: string) {
   return {
     jobItemsSliced,
     isLoading,
+    resultsCount,
+    displayedCount,
   };
 }

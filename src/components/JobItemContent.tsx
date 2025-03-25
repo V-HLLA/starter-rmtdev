@@ -1,9 +1,14 @@
 import { useActiveID, useActiveJobID } from "../lib/hooks";
 import BookmarkIcon from "./BookmarkIcon";
+import Spinner from "./Spinner";
 
 export default function JobItemContent() {
   const activeId = useActiveID();
-  const activeJobItem = useActiveJobID(activeId);
+  const { activeJobItem, isLoading } = useActiveJobID(activeId);
+
+  if (isLoading) {
+    return <EmptyJob />;
+  }
 
   if (!activeJobItem) {
     return <EmptyJobContent />;
@@ -94,6 +99,16 @@ export default function JobItemContent() {
             it!
           </p>
         </footer>
+      </div>
+    </section>
+  );
+}
+
+function EmptyJob() {
+  return (
+    <section className="job-details">
+      <div>
+        <Spinner />
       </div>
     </section>
   );
