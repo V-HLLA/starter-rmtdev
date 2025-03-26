@@ -1,4 +1,4 @@
-import { useActiveID } from "../lib/hooks";
+import { useURLActiveJobID } from "../lib/hooks";
 import { TJobItem } from "../lib/types";
 import JobListItem from "./JobListItem";
 import Spinner from "./Spinner";
@@ -9,7 +9,7 @@ type TJoblistProps = {
 };
 
 export function JobList({ jobItems, isLoading }: TJoblistProps) {
-  const activeID = useActiveID();
+  const activeID = useURLActiveJobID();
 
   return (
     <ul className="job-list">

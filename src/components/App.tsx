@@ -12,7 +12,7 @@ import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
-import { useDebounce, useJobsItems } from "../lib/hooks";
+import { useDebounce, useJobSearchResults } from "../lib/hooks";
 
 function App() {
   const [searchText, setSearchText] = useState("");
@@ -22,7 +22,7 @@ function App() {
     isLoading,
     resultsCount,
     displayedCount,
-  } = useJobsItems(debouncedValue);
+  } = useJobSearchResults(debouncedValue);
 
   return (
     <>

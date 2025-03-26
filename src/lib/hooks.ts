@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { TJobItem, TJobItemExpanded } from "./types";
 import { BASE_API_URL } from "./constants";
 
-export function useActiveID() {
+// Hook to track the active job ID from the URL hash
+export function useURLActiveJobID() {
   const [activeID, setActiveID] = useState<number | null>(null);
 
   useEffect(() => {
@@ -19,7 +20,8 @@ export function useActiveID() {
   return activeID;
 }
 
-export function useActiveJobID(activeID: number | null) {
+// Hook to fetch job details for the active job ID
+export function useJobDetails(activeID: number | null) {
   const [activeJobItem, setActiveJobItem] = useState<TJobItemExpanded | null>(
     null
   );
@@ -28,12 +30,12 @@ export function useActiveJobID(activeID: number | null) {
   useEffect(() => {
     if (!activeID) return;
 
-    setIsLoading(true);
     const fetchData = async () => {
+      setIsLoading(true);
       const response = await fetch(`${BASE_API_URL}/${activeID}`);
       const data = await response.json();
-      setIsLoading(false);
       setActiveJobItem(data.jobItem);
+      setIsLoading(false);
     };
     fetchData();
   }, [activeID]);
@@ -41,12 +43,13 @@ export function useActiveJobID(activeID: number | null) {
   return { activeJobItem, isLoading };
 }
 
-export function useJobsItems(searchText: string) {
+// Hook to fetch job listings based on a search query
+export function useJobSearchResults(searchText: string) {
   const [jobItems, setJobItems] = useState<TJobItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const jobItemsSliced = jobItems.slice(0, 7);
-  const displayedCount = jobItems.slice(0, 7).length;
+  const displayedCount = jobItemsSliced.length;
   const resultsCount = jobItems.length;
 
   useEffect(() => {
