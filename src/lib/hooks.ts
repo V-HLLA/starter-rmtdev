@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { TJobItemApiResponse, TJobListApiResponse } from "./types";
 import { BASE_API_URL } from "./constants";
 import { useQuery } from "@tanstack/react-query";
+import { handleError } from "./utils";
 
+// Hook to fetch job details for the active job ID
 const fetchJobItem = async (activeID: number): Promise<TJobItemApiResponse> => {
   const response = await fetch(`${BASE_API_URL}/${activeID}`);
   if (!response.ok) {
@@ -12,7 +14,6 @@ const fetchJobItem = async (activeID: number): Promise<TJobItemApiResponse> => {
   const data = await response.json();
   return data;
 };
-// Hook to fetch job details for the active job ID
 export function useJobDetails(activeID: number | null) {
   const { data, isInitialLoading } = useQuery(
     ["job-item", activeID],
@@ -22,47 +23,24 @@ export function useJobDetails(activeID: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(activeID),
-      onError: (error) => {
-        // TODO: IMPLEMENT ERROR HANDLING
-        console.log(error);
-      },
+      onError: handleError,
     }
   );
   return { jobItem: data?.jobItem, isLoading: isInitialLoading } as const;
 }
 
 // Hook to fetch job listings based on a search query
-// export function useJobSearchResults(searchText: string) {
-//   const [jobItems, setJobItems] = useState<TJobItem[]>([]);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   useEffect(() => {
-//     if (!searchText) return;
-
-//     const fetchData = async () => {
-//       setIsLoading(true);
-//       const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
-//       const data = await response.json();
-//       setIsLoading(false);
-//       setJobItems(data.jobItems);
-//     };
-//     fetchData();
-//   }, [searchText]);
-
-//   return {
-//     jobItems,
-//     isLoading,
-//   };
-// }
-
 const fetchJobList = async (
   searchText: string
 ): Promise<TJobListApiResponse> => {
   const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.description);
+  }
   const data = await response.json();
   return data;
 };
-// Hook to fetch job listings based on a search query
 export function useJobSearchResults(searchText: string) {
   const { data, isInitialLoading } = useQuery(
     ["job-items", searchText],
@@ -72,10 +50,7 @@ export function useJobSearchResults(searchText: string) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(searchText),
-      onError: (error) => {
-        // TODO: IMPLEMENT ERROR HANDLING
-        console.log(error);
-      },
+      onError: handleError,
     }
   );
   return { jobItems: data?.jobItems, isLoading: isInitialLoading } as const;
